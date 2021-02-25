@@ -7,7 +7,6 @@ log.info """\
 NEXTFLOW PIPELINE
 =================
 input : ${params.input}
-fasta : ${params.fasta}
 outdir: ${params.outdir}
 """
 

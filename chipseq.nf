@@ -16,12 +16,22 @@ def download(String module, String branch) {
     return file.getAbsolutePath().replaceFirst(/.nf$/, '')
 }
 
-checksum_file = download('checksum')
-include { CHECKSUM } from "${checksum_file}" addParams(options: [publish_dir: "checksum"])
-parse_input_file = download('parse_input')
-include { PARSE_INPUT } from "${parse_input_file}" addParams(options: [input: params.input])
+checksum_file = download('checksum', 'master')
+include { CHECKSUM } from "${checksum_file}" addParams(options: [publish_dir: "md5"])
 
 workflow CHIPSEQ {
   main:
-  PARSE_INPUT() | CHECKSUM
+
+  Channel.fromPath(params.input)
+         .splitCsv(header: true)
+         .map{ row ->
+            fq1 = row.remove("fastq_1")
+            fq2 = row.remove("fastq_2")
+            def meta = row.clone()
+            meta.id = row.group + "_R" + row.replicate
+            meta.single_end = fq2 == ""
+            [meta, [fq1, fq2]]}
+         .set{ch_fastq}
+
+  CHECKSUM(ch_fastq)
 }

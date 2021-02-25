@@ -6,7 +6,7 @@ The sample files are located at main.nf, and chipseq.nf.
 
 First, put the following code in the nf file you want to load remote modules.
 
-'''nextflow
+```nextflow
 def download(String module, String branch) {
   remote = "https://raw.githubusercontent.com/jianhong/universalModule/${branch}/modules/"
   ext    = "/main.nf"
@@ -16,21 +16,21 @@ def download(String module, String branch) {
     }
     return file.getAbsolutePath().replaceFirst(/.nf$/, '')
 }
-'''
+```
 
 Second, include the modules by download the modules.
 
-'''nextflow
-checksum_file = download('checksum')
+```nextflow
+checksum_file = download('checksum', 'master')
 include { CHECKSUM } from "${checksum_file}" addParams(options: [publish_dir: "checksum"])
-'''
+```
 
 And call the process within workflow.
 
-'''nextflow
+```nextflow
 workflow {
   take: input_fastq
   main:
   CHECKSUM(input_fastq)
 }
-'''
+```

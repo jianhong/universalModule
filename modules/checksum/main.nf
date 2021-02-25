@@ -1,24 +1,26 @@
-params.options = [publish_dir: 'checksum',
-                  publish_mode: 'copy',
-                  md5_exec : "md5",
-                  gunzip_exec : "gunzip"]
+params.options = [:]
+options = [publish_dir: 'checksum',
+           publish_mode: 'copy',
+           md5_exec : "md5sum",
+           gunzip_exec : "gunzip"]
 process CHECKSUM {
   tag "$meta.id"
-  publishDir "${params.outdir}/${params.options.publish_dir}",
-             mode: params.options.publish_mode
+  publishDir "${params.outdir}/${options.publish_dir}",
+             mode: options.publish_mode
 
   input: tuple val(meta), path(reads)
   output: path("md5.*.txt"), emit: md5
   script:
   def prefix = meta.id
+  params.options.forEach{key, value -> options[key]=value}
   if (meta.single_end) {
         """
         touch md5.${prefix}.txt
         [ ! -f  ${prefix}.fastq.gz ] && ln -s ${reads[0]} ${prefix}.fastq.gz
-        ${params.options.gunzip_exec} -c ${prefix}.fastq.gz > ${prefix}.fastq
-        ${${params.options.md5_exec}} ${prefix}.fastq >>md5.${prefix}.txt
+        ${options.gunzip_exec} -c ${prefix}.fastq.gz > ${prefix}.fastq
+        ${options.md5_exec} ${prefix}.fastq >>md5.${prefix}.txt
         if [ "${meta.md5_1}" != "null" ]; then
-            md5=(\$(${${params.options.md5_exec}} ${prefix}.fastq.gz))
+            md5=(\$(${options.md5_exec} ${prefix}.fastq.gz))
             if [ "\$md5" != "${meta.md5_1}" ]
             then
                 echo "${meta.id} has checksum ${meta.md5_1}, but we got checksum \$md5!"
@@ -31,12 +33,12 @@ process CHECKSUM {
         touch md5.${prefix}.txt
         [ ! -f  ${prefix}_1.fastq.gz ] && ln -s ${reads[0]} ${prefix}_1.fastq.gz
         [ ! -f  ${prefix}_2.fastq.gz ] && ln -s ${reads[1]} ${prefix}_2.fastq.gz
-        ${params.options.gunzip_exec} -c ${prefix}_1.fastq.gz > ${prefix}_1.fastq
-        ${${params.options.md5_exec}} ${prefix}_1.fastq >>md5.${prefix}.txt
-        ${params.options.gunzip_exec} -c ${prefix}_2.fastq.gz > ${prefix}_2.fastq
-        ${${params.options.md5_exec}} ${prefix}_2.fastq >>md5.${prefix}.txt
+        ${options.gunzip_exec} -c ${prefix}_1.fastq.gz > ${prefix}_1.fastq
+        ${options.md5_exec} ${prefix}_1.fastq >>md5.${prefix}.txt
+        ${options.gunzip_exec} -c ${prefix}_2.fastq.gz > ${prefix}_2.fastq
+        ${options.md5_exec} ${prefix}_2.fastq >>md5.${prefix}.txt
         if [ "${meta.md5_1}" != "null" ]; then
-            md5=(\$(${${params.options.md5_exec}} ${prefix}_1.fastq.gz))
+            md5=(\$(${options.md5_exec} ${prefix}_1.fastq.gz))
             if [ "\$md5" != "${meta.md5_1}" ]
             then
                 echo "${meta.id} has checksum ${meta.md5_1}, but we got checksum \$md5!"
@@ -44,7 +46,7 @@ process CHECKSUM {
             fi
         fi
         if [ "${meta.md5_2}" != "null" ]; then
-            md5=(\$(${${params.options.md5_exec}} ${prefix}_2.fastq.gz))
+            md5=(\$(${options.md5_exec} ${prefix}_2.fastq.gz))
             if [ "\$md5" != "${meta.md5_2}" ]
             then
                 echo "${meta.id} has checksum ${meta.md5_2}, but we got checksum \$md5!"
