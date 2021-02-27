@@ -8,8 +8,17 @@ process CHECKSUM {
   publishDir "${params.outdir}/${options.publish_dir}",
              mode: options.publish_mode
 
+   conda (params.enable_conda ? "conda-forge::sed=4.7" : null)
+   if (workflow.containerEngine == 'singularity' && !params.singularity_pull_docker_container) {
+       container "https://containers.biocontainers.pro/s3/SingImgsRepo/biocontainers/v1.2.0_cv1/biocontainers_v1.2.0_cv1.img"
+   } else {
+       container "biocontainers/biocontainers:v1.2.0_cv1"
+   }
+
   input: tuple val(meta), path(reads)
-  output: path("md5.*.txt"), emit: md5
+  output:
+  path("md5.*.txt"), emit: md5
+  
   script:
   def prefix = meta.id
   params.options.forEach{key, value -> options[key]=value}

@@ -36,3 +36,5 @@ workflow {
 
 - [checksum](checksum.html)
 - [md_html](md_html.html)
+- [gunzip](gunzip.html)
+- [untar](untar.html)
