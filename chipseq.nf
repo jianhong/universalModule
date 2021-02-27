@@ -1,23 +1,17 @@
 /*
  * There are three steps to use the remote module
- * 1. write download module function
+ * 1. download loadmodule.groovy from remote file
  * 2. the module must be one file module
  * 3. load it outside of workflow or process
  */
 params.options = [:]
 
-def download(String module, String branch) {
-  remote = "https://raw.githubusercontent.com/jianhong/universalModule/${branch}/modules/"
-  ext    = "/main.nf"
-  File file = File.createTempFile(module, '.nf');
-    file.withOutputStream { out ->
-      new URL(remote + module + ext).withInputStream{ from -> out << from; }
-    }
-    return file.getAbsolutePath().replaceFirst(/.nf$/, '')
+def library = new GroovyScriptEngine('https://raw.githubusercontent.com/jianhong/universalModule/master/').with{
+  loadScriptByName("lib/loadmodule.groovy")
 }
+this.metaClass.mixin library
 
-checksum_file = download('checksum', 'master')
-include { CHECKSUM } from "${checksum_file}" addParams(options: [publish_dir: "md5"])
+include { CHECKSUM } from loadModule('checksum', 'master') addParams(options: [publish_dir: "md5"])
 
 workflow CHIPSEQ {
   main:
