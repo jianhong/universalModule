@@ -12,10 +12,9 @@ helpChannel = Channel.fromPath("${workflow.projectDir}/modules/**/readme.md")
 
 process TEST {
   input: path(test_file)
-  output: path("*.html"), emit: doc
   script:
   """
-  nextflow run ${test_file} --docker
+  nextflow run ${test_file} --conda
   """
 }
 
