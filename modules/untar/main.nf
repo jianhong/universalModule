@@ -20,7 +20,7 @@ options = [publish_dir: '.',
      path archive
 
      output:
-     path "$$untar",       emit: untar
+     path "$untar",       emit: untar
      path "tar.version.txt", emit: version
 
      script:
