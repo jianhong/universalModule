@@ -5,6 +5,7 @@
 - publish_dir, publish directory
 - publish_mode, publish mode
 
-## input [md]
+## input [output, md]
 
+- output, output html file name, must with extension ".html"
 - md, markdown file path
