@@ -1,4 +1,4 @@
-# BWA_INDEX module
+# BWA_MEM module
 
 ## params.options
 

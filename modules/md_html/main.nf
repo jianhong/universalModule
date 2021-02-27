@@ -5,7 +5,7 @@ process MD_HTML {
   publishDir "${params.outdir}/${options.publish_dir}",
              mode: options.publish_mode
 
-  conda (params.conda ? "markdown=3.2.2 conda-forge::pymdown-extensions=7.1" : null)
+  conda (params.enable_conda ? "markdown=3.2.2 conda-forge::pymdown-extensions=7.1" : null)
 
   input:
     tuple val(output), path(md)
