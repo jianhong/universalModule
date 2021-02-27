@@ -36,7 +36,6 @@ jobs:
       - name: Run pipeline with test data
         run: |
           nextflow run ${GITHUB_WORKSPACE}/test.nf
-          mv results/*.html ./
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
