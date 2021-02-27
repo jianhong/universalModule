@@ -39,30 +39,38 @@
     <body>
     <div class="container">
     <div class="toc"><span class="toctitle">Table of Contents</span><ul>
-<li><a href="#checksum-module">CHECKSUM module</a><ul>
+<li><a href="#bwa_mem-module">BWA_MEM module</a><ul>
 <li><a href="#paramsoptions">params.options</a></li>
-<li><a href="#input-meta-fq1-fq2">input [meta, [fq1, fq2]]</a></li>
+<li><a href="#labels">labels</a></li>
+<li><a href="#input">input</a></li>
 <li><a href="#output">output</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<h1 id="checksum-module">CHECKSUM module</h1>
+<h1 id="bwa_mem-module">BWA_MEM module</h1>
 <h2 id="paramsoptions">params.options</h2>
 <ul>
-<li>publish_dir, publish directory, default 'checksum'</li>
+<li>publish_dir, publish directory, default 'bwa/mem'</li>
 <li>publish_mode, publish mode, default 'copy'</li>
-<li>md5_exec, md5 command, the first output must be checksum.</li>
-<li>gunzip_exec, gunzip command to unzip gz files</li>
+<li>publish_enabled, publish enabled, defaults false</li>
+<li>args, arguments for bwa mem command, default "-M"</li>
+<li>samtools_args, arguments for samtools view command, default "-h -F 0x0100 -O BAM"</li>
+<li>suffix, suffix for output file name, default ""</li>
 </ul>
-<h2 id="input-meta-fq1-fq2">input [meta, [fq1, fq2]]</h2>
+<h2 id="labels">labels</h2>
 <ul>
-<li>meta, map with keys id, md5_1, md5_2</li>
-<li>reads, reads file</li>
+<li>process_high</li>
+</ul>
+<h2 id="input">input</h2>
+<ul>
+<li>tuple val(meta), path(reads)</li>
+<li>tuple path(index), path(fasta)</li>
 </ul>
 <h2 id="output">output</h2>
 <ul>
-<li>path("md5.*.txt"), emit: md5</li>
+<li>tuple val(meta), path("*.bam"), emit: bam</li>
+<li>path "bwa.version.txt", emit: version</li>
 </ul>
     </div>
     </body>

@@ -41,7 +41,8 @@
     <div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#md_html-module">MD_HTML module</a><ul>
 <li><a href="#paramsoptions">params.options</a></li>
-<li><a href="#input-md">input [md]</a></li>
+<li><a href="#input-output-md">input [output, md]</a></li>
+<li><a href="#output-pathhtml-emit-html">output path("*.html"), emit: html</a></li>
 </ul>
 </li>
 </ul>
@@ -49,12 +50,17 @@
 <h1 id="md_html-module">MD_HTML module</h1>
 <h2 id="paramsoptions">params.options</h2>
 <ul>
-<li>publish_dir, publish directory</li>
-<li>publish_mode, publish mode</li>
+<li>publish_dir, publish directory, default 'html'</li>
+<li>publish_mode, publish mode, default 'copy'</li>
 </ul>
-<h2 id="input-md">input [md]</h2>
+<h2 id="input-output-md">input [output, md]</h2>
 <ul>
+<li>output, output html file name, must with extension ".html"</li>
 <li>md, markdown file path</li>
+</ul>
+<h2 id="output-pathhtml-emit-html">output path("*.html"), emit: html</h2>
+<ul>
+<li>html, a html file named by input value(output)</li>
 </ul>
     </div>
     </body>
