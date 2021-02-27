@@ -1,0 +1,65 @@
+<!DOCTYPE html><html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            body {
+              font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+              padding: 3em;
+              margin-right: 350px;
+              max-width: 100%;
+            }
+            .toc {
+              position: fixed;
+              right: 20px;
+              width: 300px;
+              padding-top: 20px;
+              overflow: scroll;
+              height: calc(100% - 3em - 20px);
+            }
+            .toctitle {
+              font-size: 1.8em;
+              font-weight: bold;
+            }
+            .toc > ul {
+              padding: 0;
+              margin: 1rem 0;
+              list-style-type: none;
+            }
+            .toc > ul ul { padding-left: 20px; }
+            .toc > ul > li > a { display: none; }
+            img { max-width: 800px; }
+            pre {
+              padding: 0.6em 1em;
+            }
+            h2 {
+
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+    <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#checksum-module">CHECKSUM module</a><ul>
+<li><a href="#paramsoptions">params.options</a></li>
+<li><a href="#input-meta-fq1-fq2">input [meta, [fq1, fq2]]</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="checksum-module">CHECKSUM module</h1>
+<h2 id="paramsoptions">params.options</h2>
+<ul>
+<li>publish_dir, publish directory</li>
+<li>publish_mode, publish mode</li>
+<li>md5_exec, md5 command, the first output must be checksum.</li>
+<li>gunzip_exec, gunzip command to unzip gz files</li>
+</ul>
+<h2 id="input-meta-fq1-fq2">input [meta, [fq1, fq2]]</h2>
+<ul>
+<li>meta, map with keys id, md5_1, md5_2</li>
+<li>reads, reads file</li>
+</ul>
+    </div>
+    </body>
+    </html>
+    

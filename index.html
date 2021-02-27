@@ -1,0 +1,79 @@
+<!DOCTYPE html><html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            body {
+              font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+              padding: 3em;
+              margin-right: 350px;
+              max-width: 100%;
+            }
+            .toc {
+              position: fixed;
+              right: 20px;
+              width: 300px;
+              padding-top: 20px;
+              overflow: scroll;
+              height: calc(100% - 3em - 20px);
+            }
+            .toctitle {
+              font-size: 1.8em;
+              font-weight: bold;
+            }
+            .toc > ul {
+              padding: 0;
+              margin: 1rem 0;
+              list-style-type: none;
+            }
+            .toc > ul ul { padding-left: 20px; }
+            .toc > ul > li > a { display: none; }
+            img { max-width: 800px; }
+            pre {
+              padding: 0.6em 1em;
+            }
+            h2 {
+
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+    <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#universal-modules-for-qiubio-pipelines">universal modules for QiuBio pipelines</a><ul>
+<li><a href="#how-to">How to</a></li>
+<li><a href="#available-modules">Available modules</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="universal-modules-for-qiubio-pipelines">universal modules for QiuBio pipelines</h1>
+<p>The sample files are located at main.nf, and chipseq.nf.</p>
+<h2 id="how-to">How to</h2>
+<p>First, put the following code in the top of nextflow file you want to load remote modules.</p>
+<pre class="highlight"><code class="language-nextflow">def library = new GroovyScriptEngine('https://raw.githubusercontent.com/jianhong/universalModule/master/').with{
+  loadScriptByName("lib/loadmodule.groovy")
+}
+this.metaClass.mixin library</code></pre>
+
+<p>Second, include the modules by download the modules.
+The first parameter of loadModule is the module folder name.
+The second parameter is the branch name.</p>
+<pre class="highlight"><code class="language-nextflow">include { CHECKSUM } from loadModule('checksum', 'master') addParams(options: [publish_dir: "md5"])
+</code></pre>
+
+<p>And call the process within workflow.</p>
+<pre class="highlight"><code class="language-nextflow">workflow {
+  take: input_fastq
+  main:
+  CHECKSUM(input_fastq)
+}</code></pre>
+
+<h2 id="available-modules">Available modules</h2>
+<ul>
+<li><a href="checksum.html">checksum</a></li>
+<li><a href="md_html.html">md_html</a></li>
+</ul>
+    </div>
+    </body>
+    </html>
+    
