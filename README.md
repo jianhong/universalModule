@@ -31,3 +31,8 @@ workflow {
   CHECKSUM(input_fastq)
 }
 ```
+
+## Available modules
+
+- [checksum](checksum.html)
+- [md_html](md_html.html)
