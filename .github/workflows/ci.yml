@@ -13,7 +13,7 @@ on:
 jobs:
   test:
     name: Run workflow tests
-    if: ${{ github.event_name != 'push'}}
+    if: ${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'jianhong/universalModule') }}
     runs-on: ubuntu-latest
     env:
       NXF_VER: ${{ matrix.nxf_ver }}
