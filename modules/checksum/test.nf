@@ -1,6 +1,11 @@
 #!/usr/bin/env nextflow
 nextflow.enable.dsl=2
 
+def library = new GroovyScriptEngine('https://raw.githubusercontent.com/jianhong/universalModule/master/').with{
+  loadScriptByName("lib/loadmodule.groovy")
+}
+this.metaClass.mixin library
+
 params.input = "https://raw.githubusercontent.com/jianhong/chipseq/master/assets/design.csv"
 params.outdir = "./results"
 
@@ -14,17 +19,8 @@ Channel.fromPath(params.input)
          meta.single_end = fq2 == ""
          [meta, [fq1, fq2]]}
       .set{ch_fastq}
-def download(String module, String branch) {
-  remote = "https://raw.githubusercontent.com/jianhong/universalModule/${branch}/modules/"
-  ext    = "/main.nf"
-  File file = File.createTempFile(module, '.nf');
-    file.withOutputStream { out ->
-      new URL(remote + module + ext).withInputStream{ from -> out << from; }
-    }
-    return file.getAbsolutePath().replaceFirst(/.nf$/, '')
-}
 
-checksum_file = download('checksum', 'master')
+checksum_file = loadModule('checksum', 'master')
 include { CHECKSUM } from "${checksum_file}" addParams(options: [publish_dir: "md5"])
 
 workflow TEST_CHECKSUM {

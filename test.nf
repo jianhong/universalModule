@@ -3,8 +3,12 @@ nextflow.enable.dsl=2
 
 params.outdir = "./"
 
-testChannel = Channel.fromPath("modules/**/test.nf")
-helpChannel = Channel.fromPath("./**/readme.md")
+testChannel = Channel.fromPath("${workflow.projectDir}/modules/**/test.nf")
+indexChannel = Channel.fromPath("${workflow.projectDir}/readme.md")
+                      .map{ ["index.html", it ] }
+helpChannel = Channel.fromPath("${workflow.projectDir}/modules/**/readme.md")
+                     .map{ [it.toString().split('/')[-2]+".html", it ] }
+                     .concat(indexChannel)
 
 process TEST {
   input: path(test_file)
@@ -15,7 +19,7 @@ process TEST {
   """
 }
 
-include { MD_HTML } from 'modules/md_html/main' addParams([options: [publish_dir: ".", publish_mode: "copy"]])
+include { MD_HTML } from './modules/md_html/main' addParams([options: [publish_dir: ".", publish_mode: "copy"]])
 workflow {
   testChannel | TEST
   helpChannel | MD_HTML

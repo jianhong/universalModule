@@ -2,19 +2,20 @@ params.options = [:]
 options = [publish_dir: 'html',
            publish_mode: 'copy']
 process MD_HTML {
-  tag "$meta.id"
   publishDir "${params.outdir}/${options.publish_dir}",
              mode: options.publish_mode
 
-  conda (params.conda ? "markdown=3.2.2 pymdown-extensions=7.1" : null)
+  conda (params.conda ? "markdown=3.2.2 conda-forge::pymdown-extensions=7.1" : null)
 
-  input: path md
+  input:
+    tuple val(output), path(md)
   output: path("*.html"), emit: html
   script:
   params.options.forEach{key, value -> options[key]=value}
   """
   # write markdown_to_html.py
-  SEP='"""'
+  SEP='"'
+  SEP=\$SEP\$SEP\$SEP
   cat <<EOT > markdown_to_html.py
 #!/usr/bin/env python
 from __future__ import print_function
@@ -28,7 +29,7 @@ import io
 def convert_markdown(in_fn):
     input_md = io.open(in_fn, mode="r", encoding="utf-8").read()
     html = markdown.markdown(
-        "[TOC]\n" + input_md,
+        "[TOC]\\n" + input_md,
         extensions=["pymdownx.extra", "pymdownx.b64", "pymdownx.highlight", "pymdownx.emoji", "pymdownx.tilde", "toc"],
         extension_configs={
             "pymdownx.b64": {"base_path": os.path.dirname(in_fn)},
@@ -110,6 +111,6 @@ if __name__ == "__main__":
 
 EOT
   # run the script
-  python markdown_to_html.py $md -o ${md.replaceFirst(/.md$/, ".html")}
+  python markdown_to_html.py $md -o $output
   """
 }
