@@ -34,7 +34,9 @@ workflow {
 
 ## Available modules
 
+- [bwa_index](bwa_index.html)
+- [bwa_mem](bwa_mem.html)
 - [checksum](checksum.html)
-- [md_html](md_html.html)
 - [gunzip](gunzip.html)
+- [md_html](md_html.html)
 - [untar](untar.html)
