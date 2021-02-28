@@ -1,6 +1,7 @@
 params.options = [:]
 options = [publish_dir: 'bwa/mem',
            publish_mode: 'copy',
+           publish_enabled: false,
            args: '-M',
            samtools_args: '-h -F 0x0100 -O BAM',
            suffix: '']
@@ -8,7 +9,9 @@ options = [publish_dir: 'bwa/mem',
      tag "$meta.id"
      label 'process_high'
      publishDir "${params.outdir}/${options.publish_dir}",
-         mode: options.publish_mode
+         mode: options.publish_mode,
+         enabled: options.publish_enabled
+
 
      conda (params.enable_conda ? "bioconda::bwa=0.7.17" : null)
      if (workflow.containerEngine == 'singularity' && !params.singularity_pull_docker_container) {

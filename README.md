@@ -42,5 +42,7 @@ workflow {
 - [md_html](https://jianhong.github.io/universalModule/md_html.html)
 - [samtools_index](https://jianhong.github.io/universalModule/samtools_index.html)
 - [samtools_sort](https://jianhong.github.io/universalModule/samtools_sort.html)
+- [samtools_sort_index](https://jianhong.github.io/universalModule/samtools_sort_index.html)
+- [samtools_stats](https://jianhong.github.io/universalModule/samtools_stats.html)
 - [trimgalore](https://jianhong.github.io/universalModule/trimgalore.html)
 - [untar](https://jianhong.github.io/universalModule/untar.html)

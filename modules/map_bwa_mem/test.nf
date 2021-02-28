@@ -13,10 +13,9 @@ params.outdir = "."
 fasta = Channel.fromPath(params.input)
 fastq = Channel.fromPath(params.fastq)
 
-include { BWA_INDEX } from loadModule('bwa_index', 'master')
-include { BWA_MEM } from loadModule('bwa_mem', 'master')
+include { MAP_BWA_MEM } from loadModule('map_bwa_mem', 'master')
 
-workflow TEST_BWA_MEM {
+workflow TEST_MAP_BWA_MEM {
   BWA_INDEX(fasta)
-  BWA_MEM(fastq, BWA_INDEX.out.index)
+  MAP_BWA_MEM(fastq, BWA_INDEX.out.index)
 }
