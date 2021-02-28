@@ -34,9 +34,9 @@ workflow {
 
 ## Available modules
 
-- [bwa_index](bwa_index.html)
-- [bwa_mem](bwa_mem.html)
-- [checksum](checksum.html)
-- [gunzip](gunzip.html)
-- [md_html](md_html.html)
-- [untar](untar.html)
+- [bwa_index](https://jianhong.github.io/universalModule/bwa_index.html)
+- [bwa_mem](https://jianhong.github.io/universalModule/bwa_mem.html)
+- [checksum](https://jianhong.github.io/universalModule/checksum.html)
+- [gunzip](https://jianhong.github.io/universalModule/gunzip.html)
+- [md_html](https://jianhong.github.io/universalModule/md_html.html)
+- [untar](https://jianhong.github.io/universalModule/untar.html)
