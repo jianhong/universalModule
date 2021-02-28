@@ -1,8 +1,8 @@
 params.options = [:]
-options = [publish_dir: 'genome',
+options = [publish_dir: 'genome/bwa_index',
            publish_mode: 'copy',
-           publish_enabled: 'false',
-           args: '']
+           publish_enabled: false,
+           args: '-a bwtsw']
  process BWA_INDEX {
      tag "$fasta"
      label 'process_high'
