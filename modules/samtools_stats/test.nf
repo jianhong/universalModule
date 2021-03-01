@@ -11,7 +11,7 @@ params.bai = 'https://raw.githubusercontent.com/jianhong/ribosomeProfilingQC/mas
 params.outdir = "."
 
 bam = Channel.fromPath(params.bam)
-bai = Channel.fromPathparams.bai)
+bai = Channel.fromPath(params.bai)
 input = bam.combine(bai).map{[[id: "test"], it[0], it[1]]}
 
 module_file = loadModule('samtools_stats', 'master')

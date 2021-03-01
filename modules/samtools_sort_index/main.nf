@@ -1,6 +1,6 @@
 nextflow.enable.dsl=2
 
-if(!binding.hasVariable(library)){
+if(!binding.hasVariable("library")){
   def library = new GroovyScriptEngine('https://raw.githubusercontent.com/jianhong/universalModule/master/').with{
     loadScriptByName("lib/loadmodule.groovy")
   }
@@ -28,19 +28,19 @@ include { SAMTOOLS_STATS     } from loadModule('samtools_stats', 'master') addPa
                                                                                               publish_mode: options.publish_mode,
                                                                                               publish_enabled: options.publish_enabled])
 
- workflow SAMTOOLS_SORT_INDEX {
-     take:
-     ch_bam // val(meta), path(bam)
+workflow SAMTOOLS_SORT_INDEX {
+   take:
+   ch_bam // val(meta), path(bam)
 
-     main:
-      SAMTOOLS_SORT(ch_bam)
-      SAMTOOLS_INDEX(SAMTOOLS_SORT.out.bam)
-      SAMTOOLS_STATS(SAMTOOLS_INDEX.out.bai)
+   main:
+    SAMTOOLS_SORT(ch_bam)
+    SAMTOOLS_INDEX(SAMTOOLS_SORT.out.bam)
+    SAMTOOLS_STATS(SAMTOOLS_INDEX.out.bai)
 
-    emit:
-      bam = SAMTOOLS_SORT.out.bai                  // channel: [ val(meta), [ bam ], [ bai ] ]
-      stats = BAM_STATS_SAMTOOLS.out.stats         // channel: [ val(meta), [ stats ] ]
-      flagstat = BAM_STATS_SAMTOOLS.out.flagstat   // channel: [ val(meta), [ flagstat ] ]
-      idxstats = BAM_STATS_SAMTOOLS.out.idxstats   // channel: [ val(meta), [ idxstats ] ]
-      samtools_version = SAMTOOLS_SORT.out.version //    path: samtools.version.txt
- }
+  emit:
+    bam = SAMTOOLS_SORT.out.bai                  // channel: [ val(meta), [ bam ], [ bai ] ]
+    stats = BAM_STATS_SAMTOOLS.out.stats         // channel: [ val(meta), [ stats ] ]
+    flagstat = BAM_STATS_SAMTOOLS.out.flagstat   // channel: [ val(meta), [ flagstat ] ]
+    idxstats = BAM_STATS_SAMTOOLS.out.idxstats   // channel: [ val(meta), [ idxstats ] ]
+    samtools_version = SAMTOOLS_SORT.out.version //    path: samtools.version.txt
+}

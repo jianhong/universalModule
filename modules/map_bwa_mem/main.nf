@@ -1,6 +1,6 @@
 nextflow.enable.dsl=2
 
-if(!binding.hasVariable(library)){
+if(!binding.hasVariable("library")){
   def library = new GroovyScriptEngine('https://raw.githubusercontent.com/jianhong/universalModule/master/').with{
     loadScriptByName("lib/loadmodule.groovy")
   }
