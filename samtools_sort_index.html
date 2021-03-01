@@ -1,0 +1,79 @@
+<!DOCTYPE html><html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            body {
+              font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+              padding: 3em;
+              margin-right: 350px;
+              max-width: 100%;
+            }
+            .toc {
+              position: fixed;
+              right: 20px;
+              width: 300px;
+              padding-top: 20px;
+              overflow: scroll;
+              height: calc(100% - 3em - 20px);
+            }
+            .toctitle {
+              font-size: 1.8em;
+              font-weight: bold;
+            }
+            .toc > ul {
+              padding: 0;
+              margin: 1rem 0;
+              list-style-type: none;
+            }
+            .toc > ul ul { padding-left: 20px; }
+            .toc > ul > li > a { display: none; }
+            img { max-width: 800px; }
+            pre {
+              padding: 0.6em 1em;
+            }
+            h2 {
+
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+    <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#samtools_sort-module">SAMTOOLS_SORT module</a><ul>
+<li><a href="#paramsoptions">params.options</a></li>
+<li><a href="#labels">labels</a></li>
+<li><a href="#input">input</a></li>
+<li><a href="#output">output</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="samtools_sort-module">SAMTOOLS_SORT module</h1>
+<h2 id="paramsoptions">params.options</h2>
+<ul>
+<li>publish_dir, publish directory, default 'sort'</li>
+<li>publish_mode, publish mode, default 'copy'</li>
+<li>publish_enabled, publish enabled, defaul true</li>
+<li>args, arguments for samtools sort command, default: ""</li>
+<li>suffix, suffix for output file name, default ".sorted"</li>
+</ul>
+<h2 id="labels">labels</h2>
+<ul>
+<li>process_medium</li>
+</ul>
+<h2 id="input">input</h2>
+<ul>
+<li>tuple val(meta), path(bam); meta must have key id.</li>
+</ul>
+<h2 id="output">output</h2>
+<ul>
+<li>tuple val(meta), path(bam), path(bai), emit: bam</li>
+<li>tuple val(meta), path("*.stats"), emit: stats</li>
+<li>tuple val(meta), path("*.flagstat"), emit: flagstat</li>
+<li>tuple val(meta), path("*.idxstats"), emit: idxstats</li>
+<li>path "samtools.version.txt", emit: version</li>
+</ul>
+    </div>
+    </body>
+    </html>
+    
