@@ -39,6 +39,7 @@ workflow {
 - [checksum](https://jianhong.github.io/universalModule/checksum.html)
 - [fastqc](https://jianhong.github.io/universalModule/fastqc.html)
 - [gunzip](https://jianhong.github.io/universalModule/gunzip.html)
+- [map_bwa_mem](https://jianhong.github.io/universalModule/map_bwa_mem.html)
 - [md_html](https://jianhong.github.io/universalModule/md_html.html)
 - [samtools_index](https://jianhong.github.io/universalModule/samtools_index.html)
 - [samtools_sort](https://jianhong.github.io/universalModule/samtools_sort.html)

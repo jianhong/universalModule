@@ -1,5 +1,7 @@
 # SAMTOOLS_SORT module
 
+Sort and index bam files by samtools.
+
 ## params.options
 
 - publish_dir, publish directory, default 'sort'

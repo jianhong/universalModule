@@ -1,5 +1,7 @@
 # MD_HTML module
 
+Create html files from md files.
+
 ## params.options
 
 - publish_dir, publish directory, default 'html'

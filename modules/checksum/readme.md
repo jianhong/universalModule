@@ -1,5 +1,8 @@
 # CHECKSUM module
 
+Check the checksums for fastq.gz if md5_1 and md5_2 provided in the metadata.
+And create checksums for unzipped fastq files.
+
 ## params.options
 
 - publish_dir, publish directory, default 'checksum'

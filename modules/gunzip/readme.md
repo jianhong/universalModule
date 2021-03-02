@@ -4,7 +4,7 @@
 
 - publish_dir, publish directory, default '.'
 - publish_mode, publish mode, default 'copy'
-- publish_enabled, publish enabled, defaul false
+- publish_enabled, publish enabled, default false
 - args, arguments for gunzip command
 
 ## input

@@ -1,5 +1,7 @@
 # BWA_MEM module
 
+Use bwa mem tool to map reads.
+
 ## params.options
 
 - publish_dir, publish directory, default 'bwa/mem'

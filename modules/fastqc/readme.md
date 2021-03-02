@@ -1,5 +1,7 @@
 # FASTQC module
 
+Run fastqc for fastq files.
+
 ## params.options
 
 - publish_dir, publish directory, default 'fastqc'

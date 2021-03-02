@@ -1,5 +1,7 @@
 # MAP_BWA_MEM module
 
+Run bwa map and generate stats for the mapping file.
+
 ## params.options
 
 - publish_dir, publish directory, default 'bwa/mem'

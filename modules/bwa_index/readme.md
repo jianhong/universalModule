@@ -1,5 +1,7 @@
 # BWA_INDEX module
 
+Create bwa index file.
+
 ## params.options
 
 - publish_dir, publish directory, default 'genome/bwa_index'

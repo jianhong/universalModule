@@ -1,5 +1,7 @@
 # TRIMGALORE module
 
+Trim reads by trim_galore tool.
+
 ## params.options
 
 - publish_dir, publish directory, default 'trimmed'
