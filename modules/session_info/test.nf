@@ -6,7 +6,7 @@ def library = new GroovyScriptEngine('https://raw.githubusercontent.com/jianhong
 }
 this.metaClass.mixin library
 
-new File("samtools.version.txt").withWrite{ writer -> writer.writeLine "0.0.19\n"}
+new File("samtools.version.txt").withWriter{ writer -> writer.writeLine "0.0.19\n"}
 
 params.input = "samtools.version.txt"
 params.outdir = "."
